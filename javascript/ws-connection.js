@@ -19,10 +19,7 @@
 
     function setupLayout() {
         const overflowComponents = getOverflowComponents();
-        overflowComponents.forEach(overflow => {
-            overflow.style.maxHeight = '360px';
-            overflow.style.overflow = 'hidden';
-        });
+        overflowComponents.forEach(overflow => { overflow.style.maxHeight = '360px'; });
 
         const observer = new MutationObserver((mutationsList, observer) => {
             mutationsList.forEach((mutation) => {
