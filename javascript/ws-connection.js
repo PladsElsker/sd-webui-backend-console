@@ -19,7 +19,10 @@
 
     function setupLayout() {
         const overflowComponents = getOverflowComponents();
-        overflowComponents.forEach(overflow => { overflow.style.maxHeight = '360px'; });
+        overflowComponents.forEach(overflow => {
+            overflow.style.maxHeight = '360px';
+            overflow.style.overflow = 'hidden';
+        });
 
         const observer = new MutationObserver((mutationsList, observer) => {
             mutationsList.forEach((mutation) => {
@@ -28,7 +31,9 @@
                     scrollableComponents.forEach(scrollable => {
                         if(scrollable.getAttribute('force-scroll-down') === 'true') {
                             scrollable.setAttribute('force-scroll-down', 'false');
+                            const scrollMem = [window.scrollX, window.scrollY];
                             scrollable.scrollTop = scrollable.scrollHeight;
+                            requestAnimationFrame(() => window.scrollTo(...scrollMem));
                         }
                     });
                 }
